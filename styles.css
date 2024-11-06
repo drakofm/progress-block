@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#progress-container {
+  position: relative;
+  height: 320px;
+  width: 568px;
+  margin: 20px;
+  border: 1px solid red;
+}
+
+#progress-container__headline {
+  position: absolute;
+}

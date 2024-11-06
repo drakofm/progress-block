@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Progress Bar App</title>
+</head>
+<body>
+  
+  <div id="progress-container">
+      <p id="progress-container__headline" class="progress-container__paragraph">Progress</p>
+      <svg id="progress-container__bar">
+        <circle 
+          id="progress-container__basis-circle"
+          stroke="lightgray" 
+          stroke-width="6" 
+          cx="50" 
+          cy="50" 
+          r="38" 
+          fill="transparent"
+        />
+        <circle 
+          id="progress-container__progress-circle"
+          stroke="blue" 
+          stroke-width="6" 
+          cx="50" 
+          cy="50" 
+          r="38" 
+          fill="transparent"
+        />
+      </svg>
+      <section id="progress-container__controls">
+        <div class="progress-container__control-container">
+          <input id="progress-container__value-input" type="text"> 
+          <p class="progress-container__paragraph">Value</p>
+        </div>
+        <div class="progress-container__control-container">
+          <input id="progress-container__animate-toggle" type="checkbox"> 
+          <p class="progress-container__paragraph">Animate</p>
+        </div>
+        <div class="progress-container__control-container">
+          <input id="progress-container__hide-toggle" type="checkbox"> 
+          <p class="progress-container__paragraph">Hide</p>
+        </div>
+      </section>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
