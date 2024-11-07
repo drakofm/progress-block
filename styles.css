@@ -20,6 +20,9 @@
   font-size: 18px;
 }
 
+
+
+
 #progress-container {
   position: relative;
   display: flex;
@@ -33,11 +36,24 @@
   border: 1px dashed lightskyblue;
 }
 
+
+
+
 #progress-container__headline {
   position: absolute;
   top: 0;
   left: 0;
 }
+
+
+
+#progress-container__progress-circle {
+  transform-origin: center;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset .1s;
+}
+
+
 
 .progress-container__control-container {
   display: flex;
@@ -79,10 +95,10 @@
 .progress-container__slider::before {
   content: "";
   position: absolute;
-  left: 2.2px;
+  left: 2.4px;
   bottom: 2px;
-  height: 85%;
-  width: 60%;
+  height: 26px;
+  width: 26px;
   border-radius: 20px;
   background-color: white;
   transition: .1s;
