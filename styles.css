@@ -1,19 +1,45 @@
+@font-face {
+  font-family: 'GT Eesti Display Trial Rg';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./fonts/GT-Eesti-Display-Regular-Trial.woff') format('woff');
+}
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'GT Eesti Display Trial Rg',Arial,sans-serif;
 }
+
 
 #progress-container {
   position: relative;
-  height: 320px;
-  width: 568px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 568px;
+  width: 320px;
   margin: 20px;
-  border: 1px solid red;
+  border: 1px dashed lightskyblue;
 }
 
 #progress-container__headline {
   position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-container__control-container {
+  display: flex;
+  gap: 20px;
+  margin: 10px;
+}
+
+.progress-container__control-container input
+{
+  width: 40px;
 }
