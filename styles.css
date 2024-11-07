@@ -5,6 +5,11 @@
   src: url('./fonts/GT-Eesti-Display-Regular-Trial.woff') format('woff');
 }
 
+:root {
+  --slider-substrate-color: #e0e6ef;
+  --accent-color: #005bff;
+}
+
 *,
 *::before,
 *::after {
@@ -13,7 +18,6 @@
   box-sizing: border-box;
   font-family: 'GT Eesti Display Trial Rg',Arial,sans-serif;
 }
-
 
 #progress-container {
   position: relative;
@@ -39,7 +43,40 @@
   margin: 10px;
 }
 
-.progress-container__control-container input
-{
+#progress-container__value-input,
+.progress-container__label {
   width: 40px;
+  height: 24px;
+  /* background-color: lightblue; */
+  position: relative;
+}
+
+.progress-container__input {
+  appearance: none;
+}
+
+.progress-container__slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 20px;
+  background-color: var(--slider-substrate-color);
+  cursor: pointer;
+}
+
+.progress-container__slider::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  height: 80%;
+  width: 50%;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.progress-container__input:checked + .progress-container__slider {
+  background-color: var(--accent-color);
 }

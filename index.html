@@ -19,7 +19,7 @@
       >
         <circle 
           id="progress-container__basis-circle"
-          stroke="lightgray" 
+          stroke="#eff3f6" 
           stroke-width="9" 
           cx="70" 
           cy="70" 
@@ -28,7 +28,7 @@
         />
         <circle 
           id="progress-container__progress-circle"
-          stroke="blue" 
+          stroke="#005bff" 
           stroke-width="9" 
           cx="70" 
           cy="70" 
@@ -42,17 +42,29 @@
 
         <div class="progress-container__control-container">
           <input id="progress-container__value-input" type="text"> 
-          <label for="progress-container__value-input" class="progress-container__label">Value</label>
+          <label for="progress-container__value-input">Value</label>
         </div>
 
-        <div class="progress-container__control-container">
-          <input id="progress-container__animate-toggle" type="checkbox"> 
-          <label for="progress-container__animate-toggle" class="progress-container__label">Animate</label>
-        </div>
 
         <div class="progress-container__control-container">
-          <input id="progress-container__hide-toggle" type="checkbox"> 
-          <label for="progress-container__hide-toggle" class="progress-container__label">Hide</label>
+
+          <label for="progress-container__animate-toggle" class="progress-container__label">
+            <input id="progress-container__animate-toggle" class="progress-container__input" type="checkbox">
+            <span class="progress-container__slider"></span>
+          </label>
+
+          <label for="progress-container__animate-toggle">Animate</label>
+        </div>
+
+
+        <div class="progress-container__control-container">
+
+          <label for="progress-container__hide-toggle" class="progress-container__label">
+            <input id="progress-container__hide-toggle" class="progress-container__input" type="checkbox">
+          </label> 
+
+          <label for="progress-container__hide-toggle" class="progress-container__input">Hide</label>
+
         </div>
 
       </section>
