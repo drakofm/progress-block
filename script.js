@@ -1,12 +1,15 @@
-const progressBar = document.querySelector('#progress-container__progress-circle');
-const progressBarRadius = progressBar.r.baseVal.value;
-const progressBarLength = 2 * Math.PI * progressBarRadius;
-progressBar.style.strokeDasharray = `${progressBarLength} ${progressBarLength}`;
-progressBar.style.strokeDashoffset = progressBarLength;
+const progressBlock = document.querySelector('#progress-container__bar');
+const progressBarLine = document.querySelector('#progress-container__progress-circle');
+const progressBarLineRadius = progressBarLine.r.baseVal.value;
+const progressBarLineLength = 2 * Math.PI * progressBarLineRadius;
+progressBarLine.style.strokeDasharray = `${progressBarLineLength} ${progressBarLineLength}`;
+progressBarLine.style.strokeDashoffset = progressBarLineLength;
 const progressPercentInput = document.querySelector('#progress-container__value-input');
+const togglerAnimation = document.querySelector('#progress-container__animate-toggle');
+const togglerHide = document.querySelector('#progress-container__hide-toggle');
 
 const setProgressPercent = (percent) => {
-  progressBar.style.strokeDashoffset = progressBarLength - percent / 100 * progressBarLength;
+  progressBarLine.style.strokeDashoffset = progressBarLineLength - percent / 100 * progressBarLineLength;
 }
 setProgressPercent(+progressPercentInput.value);
 
