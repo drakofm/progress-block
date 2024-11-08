@@ -5,11 +5,6 @@
   src: url('./fonts/GT-Eesti-Display-Regular-Trial.woff') format('woff');
 }
 
-:root {
-  --slider-substrate-color: #e0e6ef;
-  --accent-color: #005bff;
-}
-
 *,
 *::before,
 *::after {
@@ -34,7 +29,6 @@
   width: 320px;
   margin: 20px;
 }
-
 
 
 
@@ -63,6 +57,8 @@
 @keyframes rotation {
   from {transform: rotate(-90deg);} to {transform: rotate(270deg);}
 }
+
+
 
 .progress-container__control-container {
   display: flex;
@@ -96,7 +92,7 @@
   bottom: 0;
   right: 0;
   border-radius: 20px;
-  background-color: var(--slider-substrate-color);
+  background-color: #e0e6ef;
   cursor: pointer;
   transition: .1s;
 }
@@ -114,12 +110,14 @@
 }
 
 .progress-container__input:checked + .progress-container__slider {
-  background-color: var(--accent-color);
+  background-color: #005bff;
 }
 
 .progress-container__input:checked + .progress-container__slider::before {
   transform: translateX(50%);
 }
+
+
 
 @media (orientation: landscape) {
   #progress-container {
