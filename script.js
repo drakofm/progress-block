@@ -9,12 +9,12 @@ const togglerAnimation = document.querySelector('#progress-container__animate-to
 const togglerHide = document.querySelector('#progress-container__hide-toggle');
 
 
-//добавить ограничители 0-100
+
 const setProgressPercent = (percent) => {
+  percent > 100 ? percent = 100 : percent < 0 ? percent = 0: '';
   progressBarLine.style.strokeDashoffset = progressBarLineLength - percent / 100 * progressBarLineLength;
 }
 setProgressPercent(+progressPercentInput.value);
-
 
 
 
@@ -30,7 +30,6 @@ togglerAnimation.addEventListener('change', (event) => {
   }
 });
 
-// хорошо бы сделать через hidden, добившись отсутствия смещения
 togglerHide.addEventListener('change', (event) => {
   if (event.target.checked) {
     progressBlock.style.opacity = 0;
