@@ -50,12 +50,32 @@
   transition: stroke-dashoffset .1s;
 }
 
-.progress-container__progress-circle-animated {
-  animation: rotation .7s ease-in-out infinite;
+.progress-container__progress-circle-animated-progress {
+  animation: rotationProgress .8s ease-in-out infinite;
 }
 
-@keyframes rotation {
+@keyframes rotationProgress {
   from {transform: rotate(-90deg);} to {transform: rotate(270deg);}
+}
+
+.progress-container__progress-circle-animated-loading {
+  animation: rotationLoading 1s ease-in-out infinite;
+}
+
+@keyframes rotationLoading {
+  0% {
+    stroke-dashoffset: 0;
+    transform: rotate(-90deg);
+  } 
+
+  50% {
+    stroke-dashoffset: 50%;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    transform: rotate(270deg);
+  }
 }
 
 

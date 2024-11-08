@@ -13,8 +13,35 @@ const togglerHide = document.querySelector('#progress-container__hide-toggle');
 const setProgressPercent = (percent) => {
   percent > 100 ? percent = 100 : percent < 0 ? percent = 0: '';
   progressBarLine.style.strokeDashoffset = progressBarLineLength - percent / 100 * progressBarLineLength;
-}
+};
 setProgressPercent(+progressPercentInput.value);
+
+// случай, если нужна анимация с отображением прогресса
+const switchProgressAnimation = (isChecked) => {
+  if (isChecked) {
+    progressBarLine.classList.add('progress-container__progress-circle-animated-progress');
+  } else {
+    progressBarLine.classList.remove('progress-container__progress-circle-animated-progress');
+  }
+};
+
+// случай, если нужна анимация без отображения прогресса
+const switchLoadingAnimation = (isChecked) => {
+  if (isChecked) {
+    progressBarLine.classList.add('progress-container__progress-circle-animated-loading');
+  } else {
+    progressBarLine.classList.remove('progress-container__progress-circle-animated-loading');
+    setProgressPercent(+progressPercentInput.value);
+  }
+};
+
+const switchHiding = (isChecked) => {
+  if (isChecked) {
+    progressBlock.style.opacity = 0;
+  } else {
+    progressBlock.style.opacity = 1;
+  }
+};
 
 
 
@@ -23,17 +50,9 @@ progressPercentInput.addEventListener('change', () => {
 });
 
 togglerAnimation.addEventListener('change', (event) => {
-  if (event.target.checked) {
-    progressBarLine.classList.add('progress-container__progress-circle-animated');
-  } else {
-    progressBarLine.classList.remove('progress-container__progress-circle-animated');
-  }
+  switchProgressAnimation(event.target.checked);
 });
 
 togglerHide.addEventListener('change', (event) => {
-  if (event.target.checked) {
-    progressBlock.style.opacity = 0;
-  } else {
-    progressBlock.style.opacity = 1;
-  }
+  switchHiding(event.target.checked);
 });
