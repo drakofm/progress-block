@@ -21,8 +21,12 @@ progressPercentInput.addEventListener('change', () => {
   setProgressPercent(+progressPercentInput.value);
 });
 
-togglerAnimation.addEventListener('change', () => {
-  
+togglerAnimation.addEventListener('change', (event) => {
+  if (event.target.checked) {
+    progressBarLine.classList.add('progress-container__progress-circle-animated');
+  } else {
+    progressBarLine.classList.remove('progress-container__progress-circle-animated');
+  }
 });
 
 // хорошо бы сделать через hidden, добившись отсутствия смещения
