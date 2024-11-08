@@ -17,6 +17,7 @@ setProgressPercent(+progressPercentInput.value);
 
 
 
+
 progressPercentInput.addEventListener('change', () => {
   setProgressPercent(+progressPercentInput.value);
 });
