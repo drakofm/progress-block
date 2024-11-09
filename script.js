@@ -43,11 +43,6 @@ class Progress {
     node.after(this.element);
   }
 
-  makeColor() {
-    document.querySelector('#progress-container__progress-circle').style.stroke = 'red';
-    setTimeout(() => {document.querySelector('#progress-container__progress-circle').style.stroke = '#005bff';}, 1000);
-  }
-
 }
 
 const a = new Progress();
