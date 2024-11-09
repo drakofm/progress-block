@@ -5,7 +5,8 @@ class ProgressBar {
     strokeWidth = 11, 
     strokeColorSubstrate = '#eff3f6', 
     strokeColorBar = '#005bff',
-    transitionSpeed = 0.1,
+    transitionSpeedSeconds = 0.1,
+    animationPeriodSeconds = 1,
   ) {
     this.creationTime = Date.now();
     this.rootElement = document.createElement('div');
@@ -37,16 +38,36 @@ class ProgressBar {
       </svg>
       `
     );
-    this.rootElement.style.transition = `${transitionSpeed}s`;
+    this.rootElement.style.transition = `${transitionSpeedSeconds}s`;
     this.basisCircle = this.rootElement.firstElementChild.children[0];
     this.progressCircle = this.rootElement.firstElementChild.children[1];
     this.progressCircle.style.transformOrigin = 'center';
     this.progressCircle.style.transform = 'rotate(-90deg)';
-    this.progressCircle.style.transition = `stroke-dashoffset ${transitionSpeed}s`;
+    this.progressCircle.style.transition = `stroke-dashoffset ${transitionSpeedSeconds}s`;
     this.progressCircleRadius = this.progressCircle.r.baseVal.value;
     this.progressCircleCircumference = 2 * Math.PI * this.progressCircleRadius;
     this.progressCircle.style.strokeDasharray = `${this.progressCircleCircumference} ${this.progressCircleCircumference}`;
     this.progressCircle.style.strokeDashoffset = this.progressCircleCircumference;
+    this.LoadingAnimationKeyframes = [
+      {
+        strokeDashoffset: 0,
+        transform: 'rotate(-90deg)',
+      },
+
+      {
+        strokeDashoffset: '50%',
+      },
+
+      {
+        strokeDashoffset: 0,
+        transform: 'rotate(270deg)',
+      },
+    ];
+    this.LoadingAnimationPattern = {
+      duration: animationPeriodSeconds * 1000,
+      iterations: Infinity,
+      easing: "ease-in-out",
+    }
   }
 
   insertAfter(node) {
@@ -59,10 +80,13 @@ class ProgressBar {
   }
 
   switchLoadingAnimation(isChecked) {
+    // if (isChecked) {
+    //   this.progressCircle.classList.add('progress-container__progress-circle-animated-loading');
+    // } else {
+    //   this.progressCircle.classList.remove('progress-container__progress-circle-animated-loading');
+    // }
     if (isChecked) {
-      this.progressCircle.classList.add('progress-container__progress-circle-animated-loading');
-    } else {
-      this.progressCircle.classList.remove('progress-container__progress-circle-animated-loading');
+      this.progressCircle.animate(this.LoadingAnimationKeyframes, this.LoadingAnimationPattern);
     }
   }
   

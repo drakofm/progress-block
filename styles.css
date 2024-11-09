@@ -17,7 +17,6 @@
 
 
 
-
 #progress-container {
   position: relative;
   display: flex;
@@ -40,16 +39,9 @@
 
 
 
-.progress-container__progress-circle-animated-progress {
-  animation: rotationProgress .8s ease-in-out infinite;
-}
-
-@keyframes rotationProgress {
-  from {transform: rotate(-90deg);} to {transform: rotate(270deg);}
-}
-
 .progress-container__progress-circle-animated-loading {
   animation: rotationLoading 1s ease-in-out infinite;
+  animation: name duration timing-function delay iteration-count direction fill-mode;
 }
 
 @keyframes rotationLoading {
