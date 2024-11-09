@@ -37,6 +37,7 @@ class ProgressBar {
       </svg>
       `
     );
+    this.rootElement.style.transition = `${transitionSpeed}s`;
     this.basisCircle = this.rootElement.firstElementChild.children[0];
     this.progressCircle = this.rootElement.firstElementChild.children[1];
     this.progressCircle.style.transformOrigin = 'center';
