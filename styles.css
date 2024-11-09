@@ -40,16 +40,6 @@
 
 
 
-#progress-container__bar {
-  transition: .1s;
-}
-
-#progress-container__progress-circle {
-  transform-origin: center;
-  transform: rotate(-90deg);
-  transition: stroke-dashoffset .1s;
-}
-
 .progress-container__progress-circle-animated-progress {
   animation: rotationProgress .8s ease-in-out infinite;
 }

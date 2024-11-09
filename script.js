@@ -1,23 +1,23 @@
-class Progress {
+class ProgressBar {
 
   constructor(
     size = 160, 
     strokeWidth = 11, 
     strokeColorSubstrate = '#eff3f6', 
-    strokeColorBar = '#005bff'
+    strokeColorBar = '#005bff',
+    transitionSpeed = 0.1,
   ) {
     this.creationTime = Date.now();
-    this.element = document.createElement('div');
-    this.element.insertAdjacentHTML('afterbegin', 
+    this.rootElement = document.createElement('div');
+    this.rootElement.insertAdjacentHTML('afterbegin', 
       `
         <svg
-        id="progress-container__bar"
-        class="progress-container__bar-class"
+        id="progress-container__bar-${this.creationTime}"
         width="${size}"
         height="${size}"
       >
         <circle 
-          id="progress-container__basis-circle"
+          id="progress-container__basis-circle-${this.creationTime}"
           stroke="${strokeColorSubstrate}" 
           stroke-width="${strokeWidth}"
           cx="${size / 2}" 
@@ -26,7 +26,7 @@ class Progress {
           fill="transparent"
         />
         <circle 
-          id="progress-container__progress-circle"
+          id="progress-container__progress-circle-${this.creationTime}"
           stroke="${strokeColorBar}" 
           stroke-width="${strokeWidth}"
           cx="${size / 2}" 
@@ -37,72 +37,63 @@ class Progress {
       </svg>
       `
     );
+    this.basisCircle = this.rootElement.firstElementChild.children[0];
+    this.progressCircle = this.rootElement.firstElementChild.children[1];
+    this.progressCircle.style.transformOrigin = 'center';
+    this.progressCircle.style.transform = 'rotate(-90deg)';
+    this.progressCircle.style.transition = `stroke-dashoffset ${transitionSpeed}s`;
+    this.progressCircleRadius = this.progressCircle.r.baseVal.value;
+    this.progressCircleCircumference = 2 * Math.PI * this.progressCircleRadius;
+    this.progressCircle.style.strokeDasharray = `${this.progressCircleCircumference} ${this.progressCircleCircumference}`;
+    this.progressCircle.style.strokeDashoffset = this.progressCircleCircumference;
   }
 
   insertAfter(node) {
-    node.after(this.element);
+    node.after(this.rootElement);
   }
+
+  setProgressPercent(percent) {
+    percent > 100 ? percent = 100 : percent < 0 ? percent = 0: '';
+    this.progressCircle.style.strokeDashoffset = this.progressCircleCircumference - percent / 100 * this.progressCircleCircumference;
+  }
+
+  switchLoadingAnimation(isChecked) {
+    if (isChecked) {
+      this.progressCircle.classList.add('progress-container__progress-circle-animated-loading');
+    } else {
+      this.progressCircle.classList.remove('progress-container__progress-circle-animated-loading');
+    }
+  }
+  
+  switchHiding(isChecked) {
+    if (isChecked) {
+      this.rootElement.style.opacity = 0;
+    } else {
+      this.rootElement.style.opacity = 1;
+    }
+  }
+
+  // TODO: анимации нужно перенести из CSS в JS
 
 }
 
-const a = new Progress();
-a.insertAfter(document.querySelector('#progress-container__headline'));
+const firstProgressBar = new ProgressBar();
+firstProgressBar.insertAfter(document.querySelector('#progress-container__headline'));
 
-const progressBlock = document.querySelector('#progress-container__bar');
-const progressBarLine = document.querySelector('#progress-container__progress-circle');
-const progressBarLineRadius = progressBarLine.r.baseVal.value;
-const progressBarLineLength = 2 * Math.PI * progressBarLineRadius;
-progressBarLine.style.strokeDasharray = `${progressBarLineLength} ${progressBarLineLength}`;
-progressBarLine.style.strokeDashoffset = progressBarLineLength;
 const progressPercentInput = document.querySelector('#progress-container__value-input');
 const togglerAnimation = document.querySelector('#progress-container__animate-toggle');
 const togglerHide = document.querySelector('#progress-container__hide-toggle');
 
 
 
-const setProgressPercent = (percent) => {
-  percent > 100 ? percent = 100 : percent < 0 ? percent = 0: '';
-  progressBarLine.style.strokeDashoffset = progressBarLineLength - percent / 100 * progressBarLineLength;
-};
-setProgressPercent(+progressPercentInput.value);
-
-// случай, если нужна анимация с отображением прогресса
-const switchProgressAnimation = (isChecked) => {
-  if (isChecked) {
-    progressBarLine.classList.add('progress-container__progress-circle-animated-progress');
-  } else {
-    progressBarLine.classList.remove('progress-container__progress-circle-animated-progress');
-  }
-};
-
-// случай, если нужна анимация без отображения прогресса
-const switchLoadingAnimation = (isChecked) => {
-  if (isChecked) {
-    progressBarLine.classList.add('progress-container__progress-circle-animated-loading');
-  } else {
-    progressBarLine.classList.remove('progress-container__progress-circle-animated-loading');
-    setProgressPercent(+progressPercentInput.value);
-  }
-};
-
-const switchHiding = (isChecked) => {
-  if (isChecked) {
-    progressBlock.style.opacity = 0;
-  } else {
-    progressBlock.style.opacity = 1;
-  }
-};
-
-
-
 progressPercentInput.addEventListener('change', () => {
-  setProgressPercent(+progressPercentInput.value);
+  firstProgressBar.setProgressPercent(+progressPercentInput.value);
 });
 
 togglerAnimation.addEventListener('change', (event) => {
-  switchProgressAnimation(event.target.checked);
+  firstProgressBar.switchLoadingAnimation(event.target.checked);
 });
 
 togglerHide.addEventListener('change', (event) => {
-  switchHiding(event.target.checked);
+  firstProgressBar.switchHiding(event.target.checked);
 });
