@@ -17,7 +17,7 @@
 
 
 
-#progress-container {
+.progress-container {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
 
 
 
-#progress-container__headline {
+.progress-container__headline {
   position: absolute;
   top: 0;
   left: 0;
@@ -52,7 +52,7 @@
   position: relative;
 }
 
-#progress-container__value-input {
+.progress-container__value-input {
   width: 48px;
   height: 32px;
   border-radius: 20px;
