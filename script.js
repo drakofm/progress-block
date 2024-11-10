@@ -48,26 +48,30 @@ class ProgressBar {
     this.progressCircleCircumference = 2 * Math.PI * this.progressCircleRadius;
     this.progressCircle.style.strokeDasharray = `${this.progressCircleCircumference} ${this.progressCircleCircumference}`;
     this.progressCircle.style.strokeDashoffset = this.progressCircleCircumference;
-    this.LoadingAnimationKeyframes = [
-      {
-        strokeDashoffset: 0,
-        transform: 'rotate(-90deg)',
-      },
+    this.progressCircleKeyframeEffect = new KeyframeEffect(
+      this.progressCircle,
+      [
+        {
+          strokeDashoffset: 0,
+          transform: 'rotate(-90deg)',
+        },
 
-      {
-        strokeDashoffset: '50%',
-      },
+        {
+          strokeDashoffset: '50%',
+        },
 
+        {
+          strokeDashoffset: 0,
+          transform: 'rotate(270deg)',
+        },
+      ],
       {
-        strokeDashoffset: 0,
-        transform: 'rotate(270deg)',
-      },
-    ];
-    this.LoadingAnimationPattern = {
-      duration: animationPeriodSeconds * 1000,
-      iterations: Infinity,
-      easing: "ease-in-out",
-    }
+        duration: animationPeriodSeconds * 1000,
+        iterations: Infinity,
+        easing: "ease-in-out",
+      }
+    );
+    this.progressCircleAnimation = new Animation(this.progressCircleKeyframeEffect);
   }
 
   insertAfter(node) {
@@ -80,13 +84,10 @@ class ProgressBar {
   }
 
   switchLoadingAnimation(isChecked) {
-    // if (isChecked) {
-    //   this.progressCircle.classList.add('progress-container__progress-circle-animated-loading');
-    // } else {
-    //   this.progressCircle.classList.remove('progress-container__progress-circle-animated-loading');
-    // }
     if (isChecked) {
-      this.progressCircle.animate(this.LoadingAnimationKeyframes, this.LoadingAnimationPattern);
+      this.progressCircleAnimation.play();
+    } else {
+      this.progressCircleAnimation.cancel();
     }
   }
   
