@@ -99,7 +99,7 @@
 
 
 @media (orientation: landscape) {
-  #progress-container {
+  .progress-container {
     flex-direction: row;
     height: 320px;
     width: 568px;
